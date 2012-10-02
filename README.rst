@@ -12,10 +12,10 @@ This is currently a work in progress.
 Stuff that works and is tested:
 
  * URL Matching via. Router
+ * Doctrine integration
 
 Stuff not tested:
 
- * Doctrine integration
  * Validator
 
 Stuff not currently implemented:

@@ -23,7 +23,7 @@ class EndpointManager
 
     public function getEndpointForEntity($entity)
     {
-        $epClass = $this->getEPCLassForEntity($entity);
+        $epClass = $this->getEPClassForEntity($entity);
         $endpoint = $this->getEPRepo()->findOneBy(array(
             'epClass' => $epClass->getKey(),
             'foreignId' => $entity->getId(),
@@ -38,9 +38,9 @@ class EndpointManager
         return $endpoint;
     }
 
-    public function getHandlerForEntity($entity)
+    public function getEPClassForEntity($entity)
     {
-        foreach ($this->epClasss as $epClass) {
+        foreach ($this->epClasses as $epClass) {
             if ($epClass->handles($entity)) {
                 return $epClass;
             }
@@ -51,7 +51,7 @@ class EndpointManager
 
     public function registerEPClass(EndpointClass $epClass)
     {
-        $this->epClasss[$epClass->getKey()] = $epClass;
+        $this->epClasses[$epClass->getKey()] = $epClass;
     }
 
     protected function getDefaultsForPath(Endpoint $endpoint)
@@ -61,11 +61,11 @@ class EndpointManager
 
         $epClassKey = $endpoint->getEPClass();
 
-        if (!isset($this->epClasss[$epClassKey])) {
+        if (!isset($this->epClasses[$epClassKey])) {
             throw new Exception\EPClassNotFound($endpoint);
         }
 
-        $epClass = $this->epClasss[$epClassKey];
+        $epClass = $this->epClasses[$epClassKey];
         $epClassDefaults = $epClass->getDefaults($endpoint);
         $defaults = array_merge($defaults, $epClassDefaults);
 

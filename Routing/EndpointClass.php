@@ -21,4 +21,11 @@ abstract class EndpointClass
      * )
      */
     abstract public function getDefaults(Endpoint $ep);
+
+    /**
+     * Return TRUE if this class handles the given entity
+     *
+     * e.g. return get_class($ep) == 'foo';
+     */
+    abstract public function handles($entity);
 }

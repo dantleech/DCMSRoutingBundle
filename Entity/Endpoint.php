@@ -27,6 +27,11 @@ class Endpoint
     protected $epClass;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    protected $foreignId;
+
+    /**
      * @ORM\Column(type="array")
      */
     protected $parameters;
@@ -64,5 +69,15 @@ class Endpoint
     public function setParameters($parameters)
     {
         $this->parameters = $parameters;
+    }
+
+    public function getForeignId()
+    {
+        return $this->foreignId;
+    }
+    
+    public function setForeignId($foreignId)
+    {
+        $this->foreignId = $foreignId;
     }
 }

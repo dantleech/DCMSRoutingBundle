@@ -7,7 +7,7 @@ use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\PostFlushEventArgs;
 use Doctrine\ORM\Events;
 
-use DCMS\Bundle\RoutingBundle\RoutingBundle\Routing\EndpointableInterface;
+use DCMS\Bundle\RoutingBundle\Routing\EndpointableInterface;
 use DCMS\Bundle\RoutingBundle\Routing\EndpointManager;
 
 class EndpointableSubscriber implements EventSubscriber
@@ -44,8 +44,8 @@ class EndpointableSubscriber implements EventSubscriber
         if ($entity instanceOf EndpointableInterface) {
             if ($endpoint = $this->getEndpoint($entity)) {
                 $endpointPath = $entity->getEndpointPath();
-                if ($endpointRoUte) {
-                    $endpoint->setRoute($endpointPath);
+                if ($endpointPath) {
+                    $endpoint->setPath($endpointPath);
                     $this->endpoints[] = $endpoint;
                 }
             }
