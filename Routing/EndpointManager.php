@@ -83,5 +83,13 @@ class EndpointManager
 
         return null;
     }
-}
 
+    /**
+     * Proxy method to cutdown on dependencies in
+     * validator.
+     */
+    public function getEndpointByPath($path)
+    {
+        return $this->getEPRepo()->getByPath($path);
+    }
+}

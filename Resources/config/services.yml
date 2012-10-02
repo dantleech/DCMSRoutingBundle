@@ -12,8 +12,15 @@ services:
     dcms_routing.doctrine.endpoint_subscriber:
         class: DCMS\Bundle\RoutingBundle\Doctrine\EndpointableSubscriber
         arguments: [ @dcms_routing.endpoint_manager ]
-        tags: [ { name: "doctrine.event_subscriber"} ]
+        tags:
+            - { name: "doctrine.event_subscriber"} ]
 
     dcms_routing.endpoint_manager:
         class: DCMS\Bundle\RoutingBundle\Routing\EndpointManager
         arguments: [ @service_container ]
+
+    dcms_routing.validator.endpoint_path:
+        class: DCMS\Bundle\RoutingBundle\Validation\Constraints\EndpointPathValidator
+        arguments: [ @dcms_routing.endpoint_manager ]
+        tags: 
+            - { name: validator.constraint_validator, alias: dcms_routing.endpoint_path }

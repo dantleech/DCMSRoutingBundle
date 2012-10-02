@@ -8,3 +8,17 @@ This bundle provides dynamic, extensible, database routing.
  * Routes are handled transparently by Doctrine - routes are updated and removed according to the Entity.
 
 This is currently a work in progress.
+
+Stuff that works and is tested:
+
+ * URL Matching via. Router
+
+Stuff not tested:
+
+ * Doctrine integration
+ * Validator
+
+Stuff not currently implemented:
+
+ * URL Generation
+
