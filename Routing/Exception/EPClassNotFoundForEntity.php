@@ -2,8 +2,9 @@
 
 namespace Ylly\Extension\SiteRoutingBundle\Routing\Exception;
 use Ylly\Extension\SiteRoutingBundle\Entity\SiteRoute;
+use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 
-class EPClassNotFoundForEntity extends \Exception
+class EPClassNotFoundForEntity extends ResourceNotFoundException
 {
     public function __construct($entity)
     {

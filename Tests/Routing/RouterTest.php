@@ -1,47 +1,84 @@
 <?php
 
-namespace DCMS\Bundle\RoutingBundle\Test\Routing;
+namespace DCMS\Bundle\RoutingBundle\Tests\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use DCMS\Bundle\RoutingBundle\Routing\Router;
 
-class RouterTest extends \PHPUnit_Framework_TestCase
+class RouterTest extends WebTestCase
 {
     public function setUp()
     {
-        $this->route = $this->getMock('DCMS\Bundle\RoutingBundle\Entity\Endpoint');
-        $this->route->expects($this->once())
-            ->method('getEpClass')
-            ->will($this->returnValue('test'));
+        $this->client = static::createClient();
+        $this->container = $this->client->getContainer();
 
+        // real objects
+        $this->epm = $this->container->get('dcms_routing.endpoint_manager');
+
+        // mock objects
         $this->epRepo = $this->getMockBuilder('DCMS\Bundle\RoutingBundle\Repository\EndpointRepository')
             ->disableOriginalConstructor()
             ->getMock();
-        $this->epClass = $this->getMockBuilder('\DCMS\Bundle\RoutingBundle\Routing\EndpointClass')
-            ->disableOriginalConstructor()
-            ->getMock();
-        $this->epClass->expects($this->once())
+        $this->ep = $this->getMock('DCMS\Bundle\RoutingBundle\Entity\Endpoint');
+        $this->epClass = $this->getMock('DCMS\Bundle\RoutingBundle\Routing\EndpointClass');
+        $this->epClass->expects($this->any())
             ->method('getKey')
             ->will($this->returnValue('test'));
 
-        $this->router = new Router($this->epRepo);
-        $this->router->addEndpointClass($this->epClass);
+        $this->container->set('dcms_routing.repository.endpoint', $this->epRepo);
     }
 
-    public function testMatch()
+    /**
+     * @expectedException Symfony\Component\Routing\Exception\ResourceNotFoundException
+     */
+    public function testMatch_notFound()
     {
+        $router = new Router($this->epm);
+        $router->match('/notfound');
+    }
+
+    /**
+     * @expectedException Symfony\Component\Routing\Exception\ResourceNotFoundException
+     */
+    public function testMatch_handlerNotFound()
+    {
+        $epm = $this->container->get('dcms_routing.endpoint_manager');
         $this->epRepo->expects($this->once())
-            ->method('getByRoute')
+            ->method('getByPath')
             ->with('/foobar')
-            ->will($this->returnValue($this->route));
+            ->will($this->returnValue($this->ep));
+        $this->ep->expects($this->any())
+            ->method('getEPClass')
+            ->will($this->returnValue('test'));
+
+        $router = new Router($epm);
+        $router->match('/foobar');
+    }
+
+    public function testMatch_found()
+    {
+        $epm = $this->container->get('dcms_routing.endpoint_manager');
+        $this->epRepo->expects($this->once())
+            ->method('getByPath')
+            ->with('/foobar')
+            ->will($this->returnValue($this->ep));
+        $this->ep->expects($this->any())
+            ->method('getEPClass')
+            ->will($this->returnValue('test'));
+        $this->ep->expects($this->once())
+            ->method('getId')
+            ->will($this->returnValue(5));
         $this->epClass->expects($this->once())
             ->method('getDefaults')
-            ->with($this->route)
             ->will($this->returnValue(array(
-                'foo' => 'bar',
+                'foo' => 'bar'
             )));
+        $this->epm->registerEPClass($this->epClass);
 
-        $defs = $this->router->match('/foobar');
-
+        $router = new Router($epm);
+        $defs = $router->match('/foobar');
         $this->assertEquals(array(
+            '_route' => 'dcms_endpoint_5',
             'foo' => 'bar',
         ), $defs);
     }

@@ -8,6 +8,7 @@ use Doctrine\ORM\Event\PostFlushEventArgs;
 use Doctrine\ORM\Events;
 
 use DCMS\Bundle\RoutingBundle\RoutingBundle\Routing\EndpointableInterface;
+use DCMS\Bundle\RoutingBundle\Routing\EndpointManager;
 
 class EndpointableSubscriber implements EventSubscriber
 {
@@ -16,7 +17,7 @@ class EndpointableSubscriber implements EventSubscriber
 
     public function __construct(EndpointManager $epm)
     {
-        $this->epm = $spm;
+        $this->epm = $epm;
     }
 
     public function getSubscribedEvents()
@@ -76,7 +77,7 @@ class EndpointableSubscriber implements EventSubscriber
     public function postLoad(LifecycleEventArgs $args)
     {
         $entity = $args->getEntity();
-        $endpoint = $this->srm->getEndpointForEntity($this->sm->getSite(), $entity);
+        $endpoint = $this->epm->getEndpointForEntity($this->sm->getSite(), $entity);
         $entity->setEndpointPath($endpoint->getPath());
     }
 

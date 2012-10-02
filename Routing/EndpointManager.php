@@ -1,6 +1,7 @@
 <?php
 
 namespace DCMS\Bundle\RoutingBundle\Routing;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use DCMS\Bundle\RoutingBundle\Routing\EndpointableInterface;
 use DCMS\Bundle\RoutingBundle\Entity\Endpoint;
 use DCMS\Bundle\RoutingBundle\Repository\EndpointRepository;
@@ -8,17 +9,22 @@ use DCMS\Bundle\RoutingBundle\Repository\EndpointRepository;
 class EndpointManager
 {
     protected $epClasses = array();
-    protected $epRepo;
+    protected $container;
 
-    public function __construct(EndpointRepository $epRepo)
+    public function __construct(ContainerInterface $container)
     {
-        $this->epRepo = $epRepo;
+        $this->container = $container;
+    }
+
+    protected function getEPRepo()
+    {
+        return $this->container->get('dcms_routing.repository.endpoint');
     }
 
     public function getEndpointForEntity($entity)
     {
         $epClass = $this->getEPCLassForEntity($entity);
-        $endpoint = $this->epRepo->findOneBy(array(
+        $endpoint = $this->getEPRepo()->findOneBy(array(
             'epClass' => $epClass->getKey(),
             'foreignId' => $entity->getId(),
         ));
@@ -43,7 +49,7 @@ class EndpointManager
         throw new Exception\EPClassNotFoundForEntity($entity);
     }
 
-    public function registerHandler(EndpointHandler $epClass)
+    public function registerEPClass(EndpointClass $epClass)
     {
         $this->epClasss[$epClass->getKey()] = $epClass;
     }
@@ -51,12 +57,12 @@ class EndpointManager
     protected function getDefaultsForPath(Endpoint $endpoint)
     {
         $defaults = array();
-        $defaults['_route'] = 'dcms_endpoint_'.str_replace('/', '_', $endpoint->getPath());
+        $defaults['_route'] = 'dcms_endpoint_'.str_replace('/', '_', $endpoint->getId());
 
         $epClassKey = $endpoint->getEPClass();
 
         if (!isset($this->epClasss[$epClassKey])) {
-            throw new Exception\HandlerNotFound($endpoint);
+            throw new Exception\EPClassNotFound($endpoint);
         }
 
         $epClass = $this->epClasss[$epClassKey];
@@ -66,9 +72,9 @@ class EndpointManager
         return $defaults;
     }
 
-    public function handleMatch(Site $site, $path)
+    public function handleMatch($path)
     {
-        $endpoint = $this->epRepo->getByPath($path);
+        $endpoint = $this->getEPRepo()->getByPath($path);
 
         if ($endpoint) {
             $defaults = $this->getDefaultsForPath($endpoint);

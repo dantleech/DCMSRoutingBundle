@@ -42,7 +42,7 @@ class Router implements RouterInterface
             throw new ResourceNotFoundException("/_internal/ route, passing back to chain router.");
         }
 
-        $defaults = $this->epm->handleMatch($$pathinfo);
+        $defaults = $this->epm->handleMatch($pathinfo);
 
         if ($defaults) {
             return $defaults;
