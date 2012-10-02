@@ -1,0 +1,19 @@
+parameters:
+    dcms_routing.endpoint.class: DCMS\Bundle\RoutingBundle\Entity\Endpoint
+    dcms_routing.endpoint_repository.class: DCMS\Bundle\RoutingBundle\Repository\EndpointRepository
+
+services:
+    dcms_routing.repository.endpoint:
+        class: %dcms_routing.endpoint_repository.class%
+        factory-service: doctrine
+        factory-method: getRepository
+        arguments: [ %dcms_routing.endpoint.class% ]n
+
+    dcms_routing.doctrine.endpoint_subscriber:
+        class: DCMS\Bundle\RoutingBundle\Doctrine\EndpointableSubscriber
+        arguments: [ @dcms_routing.endpoint_manager ]
+        tags: [ "doctrine.event_subscriber" ]
+
+    dcms_routing.endpoint_manager:
+        class: DCMS\Bundle\RoutingBundle\Routing\EndpointManager
+        arguments: [ @dcms_routing.repository.endpoint ]
