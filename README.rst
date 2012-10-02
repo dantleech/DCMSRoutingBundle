@@ -1,6 +1,8 @@
 DCMS Routing Bundle
 ===================
 
+<img src="https://secure.travis-ci.org/dantleech/DCMSRoutingBundle.png"/>
+
 This bundle provides dynamic, extensible, database routing.
 
  * Entities can be assigned a URL from a centralized routing table
