@@ -1,5 +1,6 @@
 <?php
 
+use Doctrine\Common\Annotations\AnnotationRegistry;
 /*
  * This file is part of the Assetic package, an OpenSky project.
  *
@@ -15,3 +16,4 @@ if (!$loader = @include __DIR__.'/../vendor/autoload.php') {
         'php composer.phar install'.PHP_EOL);
 }
 
+AnnotationRegistry::registerLoader(array($loader, 'loadClass'));
