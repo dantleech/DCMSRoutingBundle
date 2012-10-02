@@ -1,0 +1,19 @@
+framework:
+    secret:          test
+    form:            true
+    csrf_protection: true
+    validation:      { enable_annotations: true }
+    default_locale:  en
+    session:         ~
+    test: true
+
+doctrine:
+    dbal:
+        default_connection: default
+        connections:
+            default:
+                driver:   pdo_sqlite
+                path:     %kernel.cache_dir%/test.db
+    orm:
+        auto_generate_proxy_classes: %kernel.debug%
+        auto_mapping: true

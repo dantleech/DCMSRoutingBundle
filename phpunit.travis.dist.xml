@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit bootstrap="./tests/bootstrap.php" colors="true">
+    <testsuites>
+        <testsuite name="DCMS Routing Bundle Test Suite">
+            <directory suffix="Test.php">./src/DCMS/Bundle/RoutingBundle/Tests</directory>
+        </testsuite>
+
+    </testsuites>
+    <php>
+        <server name="KERNEL_DIR" value="./tests" />
+    </php>
+</phpunit>

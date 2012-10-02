@@ -1,0 +1,14 @@
+{
+    "name": "dantleech/dcms-routing-bundle",
+    "description": "Routing bundle for DCMS project",
+    "license": "MIT",
+    "autoload": {
+        "psr-0": { "DCMS\\Bundle\\RoutingBundle": "src/" }
+    },
+    "require": {
+        "php": ">=5.3.3",
+        "symfony/symfony": "2.1.*",
+        "doctrine/orm": ">=2.2.3,<2.4-dev",
+        "doctrine/doctrine-bundle": "1.0.*"
+    }
+}
