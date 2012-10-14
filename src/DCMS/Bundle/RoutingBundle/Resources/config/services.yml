@@ -9,12 +9,6 @@ services:
         factory_method: getRepository
         arguments: [ %dcms_routing.endpoint.class% ]
 
-    dcms_routing.doctrine.endpoint_subscriber:
-        class: DCMS\Bundle\RoutingBundle\Doctrine\EndpointableSubscriber
-        arguments: [ @dcms_routing.endpoint_manager ]
-        tags:
-            - { name: "doctrine.event_subscriber"} ]
-
     dcms_routing.endpoint_manager:
         class: DCMS\Bundle\RoutingBundle\Routing\EndpointManager
         arguments: [ @service_container ]

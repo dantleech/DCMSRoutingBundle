@@ -1,7 +1,7 @@
 <?php
 
 namespace DCMS\Bundle\RoutingBundle\Routing;
-use DCMS\Bundle\RoutingBundle\Entity\Endpoint;
+use DCMS\Bundle\RoutingBundle\Document\Endpoint;
 
 abstract class EndpointClass
 {

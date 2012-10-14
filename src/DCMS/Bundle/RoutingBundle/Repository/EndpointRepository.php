@@ -1,9 +1,9 @@
 <?php
 
 namespace DCMS\Bundle\RoutingBundle\Repository;
-use Doctrine\ORM\EntityRepository;
+use Doctrine\ODM\PHPCR\DocumentRepository;
 
-class EndpointRepository extends EntityRepository
+class EndpointRepository extends DocumentRepository
 {
     public function getByPath($path)
     {

@@ -1,3 +1,6 @@
+parameters:
+    locale: en
+
 framework:
     secret:          test
     form:            true
@@ -7,6 +10,17 @@ framework:
     session:         ~
     test: true
 
+doctrine_phpcr:
+    session:
+        backend:
+            type: doctrinedbal
+            connection: doctrine.dbal.default_connection
+        workspace: default
+        username: admin
+        password: admin
+    odm:
+        auto_mapping: true
+
 doctrine:
     dbal:
         default_connection: default
@@ -14,6 +28,3 @@ doctrine:
             default:
                 driver:   pdo_sqlite
                 path:     %kernel.cache_dir%/test.db
-    orm:
-        auto_generate_proxy_classes: %kernel.debug%
-        auto_mapping: true

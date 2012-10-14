@@ -1,7 +1,7 @@
 <?php
 
 namespace DCMS\Bundle\RoutingBundle\Routing\Exception;
-use DCMS\Bundle\RoutingBundle\Entity\Endpoint;
+use DCMS\Bundle\RoutingBundle\Document\Endpoint;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 
 class EPClassNotFound extends ResourceNotFoundException

@@ -3,7 +3,7 @@
 namespace DCMS\Bundle\RoutingBundle\Routing;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use DCMS\Bundle\RoutingBundle\Routing\EndpointableInterface;
-use DCMS\Bundle\RoutingBundle\Entity\Endpoint;
+use DCMS\Bundle\RoutingBundle\Document\Endpoint;
 use DCMS\Bundle\RoutingBundle\Repository\EndpointRepository;
 
 class EndpointManager
@@ -19,34 +19,6 @@ class EndpointManager
     protected function getEPRepo()
     {
         return $this->container->get('dcms_routing.repository.endpoint');
-    }
-
-    public function getEndpointForEntity($entity)
-    {
-        $epClass = $this->getEPClassForEntity($entity);
-        $endpoint = $this->getEPRepo()->findOneBy(array(
-            'epClass' => $epClass->getKey(),
-            'foreignId' => $entity->getId(),
-        ));
-
-        if (!$endpoint) {
-            $endpoint = new Endpoint;
-            $endpoint->setEpClass($epClass->getKey());
-            $endpoint->setForeignId($entity->getId()); 
-        }
-
-        return $endpoint;
-    }
-
-    public function getEPClassForEntity($entity)
-    {
-        foreach ($this->epClasses as $epClass) {
-            if ($epClass->handles($entity)) {
-                return $epClass;
-            }
-        }
-
-        throw new Exception\EPClassNotFoundForEntity($entity);
     }
 
     public function registerEPClass(EndpointClass $epClass)

@@ -19,7 +19,7 @@ class RouterTest extends WebTestCase
         $this->epRepo = $this->getMockBuilder('DCMS\Bundle\RoutingBundle\Repository\EndpointRepository')
             ->disableOriginalConstructor()
             ->getMock();
-        $this->ep = $this->getMock('DCMS\Bundle\RoutingBundle\Entity\Endpoint');
+        $this->ep = $this->getMock('DCMS\Bundle\RoutingBundle\Document\Endpoint');
         $this->epClass = $this->getMock('DCMS\Bundle\RoutingBundle\Routing\EndpointClass');
         $this->epClass->expects($this->any())
             ->method('getKey')

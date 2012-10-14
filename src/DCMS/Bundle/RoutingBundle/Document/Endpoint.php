@@ -1,44 +1,71 @@
 <?php
 
-namespace DCMS\Bundle\RoutingBundle\Entity;
-use Doctrine\ORM\Mapping as ORM;
+namespace DCMS\Bundle\RoutingBundle\Document;
+use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
 
 /**
- * @ORM\Entity(repositoryClass="DCMS\Bundle\RoutingBundle\Repository\EndpointRepository")
- * @ORM\Table(name="dcms_endpoint")
+ * @PHPCR\Document()
  */
 class Endpoint
 {
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
+    /** 
+     * @PHPCR\Id
      */
     protected $id;
 
+    /** 
+     * @PHPCR\ParentDocument
+     */
+    protected $parent;
+
+    /** 
+     * @PHPCR\NodeName
+     */
+    protected $nodeName;
+
     /**
-     * @ORM\Column(type="string")
+     * @PHPCR\String()
      */
     protected $path;
 
     /**
-     * @ORM\Column(type="string")
+     * @PHPCR\String()
      */
     protected $epClass;
 
     /**
-     * @ORM\Column(type="integer")
+     * @PHPCR\String()
      */
     protected $foreignId;
 
     /**
-     * @ORM\Column(type="array")
+     * @PHPCR\String(multivalue=true)
      */
     protected $parameters;
 
     public function getId()
     {
         return $this->id;
+    }
+
+    public function getParent()
+    {
+        return $this->parent;
+    }
+    
+    public function setParent($parent)
+    {
+        $this->parent = $parent;
+    }
+
+    public function getNodeName()
+    {
+        return $this->nodeName;
+    }
+    
+    public function setNodeName($nodeName)
+    {
+        $this->nodeName = $nodeName;
     }
 
     public function getPath()

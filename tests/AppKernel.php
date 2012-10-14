@@ -11,6 +11,7 @@ class AppKernel extends Kernel
         $bundles = array(
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new Symfony\Bundle\SecurityBundle\SecurityBundle(),
+            new Doctrine\Bundle\PHPCRBundle\DoctrinePHPCRBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new DCMS\Bundle\RoutingBundle\DCMSRoutingBundle(),
         );
