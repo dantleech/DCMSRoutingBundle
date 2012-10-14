@@ -1,3 +1,0 @@
-dcms_routing_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: DCMSRoutingBundle:Default:index }

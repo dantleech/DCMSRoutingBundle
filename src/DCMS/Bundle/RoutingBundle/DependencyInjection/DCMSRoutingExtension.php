@@ -24,5 +24,7 @@ class DCMSRoutingExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+
+        $container->setAlias('router', 'symfony_cmf.chain_router');
     }
 }

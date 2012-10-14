@@ -4,7 +4,7 @@ namespace DCMS\Bundle\RoutingBundle\Document;
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
 
 /**
- * @PHPCR\Document()
+ * @PHPCR\Document(repositoryClass="DCMS\Bundle\RoutingBundle\Repository\EndpointRepository")
  */
 class Endpoint
 {

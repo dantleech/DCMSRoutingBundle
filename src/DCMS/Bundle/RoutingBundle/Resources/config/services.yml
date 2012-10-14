@@ -1,11 +1,12 @@
 parameters:
-    dcms_routing.endpoint.class: DCMS\Bundle\RoutingBundle\Entity\Endpoint
+    dcms.chain_router_class: Symfony\Cmf\Component\Routing\ChainRouter
+    dcms_routing.endpoint.class: DCMS\Bundle\RoutingBundle\Document\Endpoint
     dcms_routing.endpoint_repository.class: DCMS\Bundle\RoutingBundle\Repository\EndpointRepository
 
 services:
     dcms_routing.repository.endpoint:
         class: %dcms_routing.endpoint_repository.class%
-        factory_service: doctrine
+        factory_service: doctrine_phpcr.odm.document_manager
         factory_method: getRepository
         arguments: [ %dcms_routing.endpoint.class% ]
 
@@ -18,3 +19,16 @@ services:
         arguments: [ @dcms_routing.endpoint_manager ]
         tags: 
             - { name: validator.constraint_validator, alias: dcms_routing.endpoint_path }
+
+    dcms_routing.router:
+        class: DCMS\Bundle\RoutingBundle\Routing\Router
+        arguments: [ @dcms_routing.endpoint_manager ]
+        tags:
+            - { name: router }
+
+    symfony_cmf.chain_router: 
+        class: %dcms.chain_router_class%
+        arguments: [ @logger ]
+        calls:
+            - [ setContext, [ @router.request_context ]]
+            - [ add, [ @dcms_routing.router ]]

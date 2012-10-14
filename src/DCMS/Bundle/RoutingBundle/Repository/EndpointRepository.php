@@ -7,8 +7,10 @@ class EndpointRepository extends DocumentRepository
 {
     public function getByPath($path)
     {
-        return $this->findOneBy(array(
+        $ep = $this->findOneBy(array(
             'path' => $path,
         ));
+        var_dump($ep);
+        return $ep;
     }
 }
