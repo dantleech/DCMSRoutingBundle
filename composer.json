@@ -11,6 +11,7 @@
         "jackalope/jackalope-doctrine-dbal": "dev-master",
         "doctrine/doctrine-bundle": "1.0.*",
         "doctrine/phpcr-bundle": "1.0.*",
+        "symfony/monolog-bundle": "2.1.*",
         "symfony-cmf/routing": "1.0.x-dev",
         "doctrine/phpcr-odm": "dev-master"
     },

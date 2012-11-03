@@ -4,11 +4,15 @@ parameters:
 framework:
     secret:          test
     form:            true
+    router:          
+        resource: "%kernel.root_dir%/config/routing.yml"
     csrf_protection: true
     validation:      { enable_annotations: true }
     default_locale:  en
     session:         ~
     test: true
+    session:
+        storage_id: session.storage.mock_file
 
 doctrine_phpcr:
     session:
@@ -26,5 +30,9 @@ doctrine:
         default_connection: default
         connections:
             default:
-                driver:   pdo_sqlite
-                path:     %kernel.cache_dir%/test.db
+                driver:   pdo_mysql
+                host:     localhost
+                dbname:   dcms_routing_test
+                user:     root
+                password: 
+                charset:  UTF8

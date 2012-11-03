@@ -1,5 +1,5 @@
 {
-    "hash": "06c6dabae91e59a15e803f6361d68077",
+    "hash": "94254826749d549d845a3cecee0e458f",
     "packages": [
         {
             "name": "doctrine/common",
@@ -18,7 +18,6 @@
             "require": {
                 "php": ">=5.3.2"
             },
-            "time": "1348120518",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -68,7 +67,8 @@
                 "eventmanager",
                 "annotations",
                 "persistence"
-            ]
+            ],
+            "time": "1348120518"
         },
         {
             "name": "doctrine/dbal",
@@ -162,7 +162,6 @@
             "suggest": {
                 "doctrine/orm": "The Doctrine ORM integration is optional in the bundle."
             },
-            "time": "1350120716",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -199,7 +198,8 @@
                 "orm",
                 "persistence",
                 "dbal"
-            ]
+            ],
+            "time": "1350120716"
         },
         {
             "name": "doctrine/phpcr-bundle",
@@ -228,7 +228,6 @@
                 "doctrine/data-fixtures": "if you want to use the fixture loading",
                 "doctrine/phpcr-odm": "if you want to use the odm as well. require version 1.0.*"
             },
-            "time": "1350167037",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -261,7 +260,8 @@
                 "persistence",
                 "phpcr",
                 "odm"
-            ]
+            ],
+            "time": "1350167037"
         },
         {
             "name": "doctrine/phpcr-odm",
@@ -292,7 +292,6 @@
                 "midgard/phpcr": ">=1.3",
                 "symfony/yaml": ">=2.0.0,<2.3.0-dev"
             },
-            "time": "1350166997",
             "bin": [
                 "bin/phpcr",
                 "bin/phpcr.php"
@@ -334,7 +333,8 @@
                 "database",
                 "phpcr",
                 "odm"
-            ]
+            ],
+            "time": "1350166997"
         },
         {
             "name": "jackalope/jackalope",
@@ -360,7 +360,6 @@
             "provide": {
                 "phpcr/phpcr-implementation": "2.1.0-beta4"
             },
-            "time": "1349905078",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -386,7 +385,8 @@
             "homepage": "http://jackalope.github.com",
             "keywords": [
                 "phpcr implementation"
-            ]
+            ],
+            "time": "1349905078"
         },
         {
             "name": "jackalope/jackalope-doctrine-dbal",
@@ -417,7 +417,6 @@
             "suggest": {
                 "phpcr/phpcr-api-tests": "dev-master"
             },
-            "time": "1349707265",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -444,6 +443,63 @@
             "keywords": [
                 "transport implementation",
                 "doctrine-dbal"
+            ],
+            "time": "1349707265"
+        },
+        {
+            "name": "monolog/monolog",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Seldaek/monolog",
+                "reference": "38bb472abb27db138536f845f7d259c1c47bbd3f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/Seldaek/monolog/zipball/38bb472abb27db138536f845f7d259c1c47bbd3f",
+                "reference": "38bb472abb27db138536f845f7d259c1c47bbd3f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "mlehner/gelf-php": "1.0.*"
+            },
+            "suggest": {
+                "mlehner/gelf-php": "Allow sending log messages to a GrayLog2 server",
+                "ext-amqp": "Allow sending log messages to an AMQP server (1.0+ required)",
+                "ext-mongo": "Allow sending log messages to a MongoDB server"
+            },
+            "time": "1351084926",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.3.x-dev"
+                }
+            },
+            "installation-source": "source",
+            "autoload": {
+                "psr-0": {
+                    "Monolog": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jordi Boggiano",
+                    "email": "j.boggiano@seld.be",
+                    "homepage": "http://seld.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Logging for PHP 5.3",
+            "homepage": "http://github.com/Seldaek/monolog",
+            "keywords": [
+                "log",
+                "logging"
             ]
         },
         {
@@ -519,7 +575,6 @@
                 "phpcr/phpcr": ">=2.1.0-beta5",
                 "symfony/console": ">=2.0.0,<2.3.0-dev"
             },
-            "time": "1350166966",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -559,7 +614,112 @@
                 "phpcr",
                 "contentrepository",
                 "cli"
+            ],
+            "time": "1350166966"
+        },
+        {
+            "name": "symfony-cmf/routing",
+            "version": "dev-master",
+            "target-dir": "Symfony/Cmf/Component/Routing",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony-cmf/Routing",
+                "reference": "ad024d9d3125a1ee30c391d4d12e33bf534ac684"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/symfony-cmf/Routing/zipball/ad024d9d3125a1ee30c391d4d12e33bf534ac684",
+                "reference": "ad024d9d3125a1ee30c391d4d12e33bf534ac684",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "symfony/routing": ">=2.1,<2.3-dev",
+                "symfony/http-kernel": ">=2.1,<2.3-dev"
+            },
+            "time": "1351276175",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "installation-source": "source",
+            "autoload": {
+                "psr-0": {
+                    "Symfony\\Cmf\\Component\\Routing": ""
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Symfony CMF Community",
+                    "homepage": "https://github.com/symfony-cmf/Routing/contributors"
+                }
+            ],
+            "description": "Extends the Symfony2 routing component for dynamic routes and chaining several routers",
+            "homepage": "http://cmf.symfony.com",
+            "keywords": [
+                "database",
+                "routing"
             ]
+        },
+        {
+            "name": "symfony/monolog-bundle",
+            "version": "dev-master",
+            "target-dir": "Symfony/Bundle/MonologBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/MonologBundle",
+                "reference": "51517152a608926ee6b40ed8cfbba1a708f0a14f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/symfony/MonologBundle/zipball/51517152a608926ee6b40ed8cfbba1a708f0a14f",
+                "reference": "51517152a608926ee6b40ed8cfbba1a708f0a14f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "monolog/monolog": "1.*",
+                "symfony/monolog-bridge": ">=2.1.0,<2.3-dev",
+                "symfony/dependency-injection": ">=2.1.0,<2.3-dev",
+                "symfony/config": ">=2.1.0,<2.3-dev"
+            },
+            "require-dev": {
+                "symfony/yaml": ">=2.1.0,<2.3-dev",
+                "symfony/config": ">=2.1.0,<2.3-dev"
+            },
+            "time": "1348137624",
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.1.x-dev"
+                }
+            },
+            "installation-source": "source",
+            "autoload": {
+                "psr-0": {
+                    "Symfony\\Bundle\\MonologBundle": ""
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony MonologBundle",
+            "homepage": "http://symfony.com"
         },
         {
             "name": "symfony/symfony",
@@ -624,7 +784,6 @@
             "suggest": {
                 "doctrine/data-fixtures": "1.0.*"
             },
-            "time": "1350207404",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -658,7 +817,8 @@
             "homepage": "http://symfony.com",
             "keywords": [
                 "framework"
-            ]
+            ],
+            "time": "1350207404"
         },
         {
             "name": "twig/twig",
@@ -677,7 +837,6 @@
             "require": {
                 "php": ">=5.2.4"
             },
-            "time": "1350154884",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -707,7 +866,8 @@
             "homepage": "http://twig.sensiolabs.org",
             "keywords": [
                 "templating"
-            ]
+            ],
+            "time": "1350154884"
         }
     ],
     "packages-dev": null,
@@ -717,6 +877,7 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "jackalope/jackalope-doctrine-dbal": 20,
+        "symfony-cmf/routing": 20,
         "doctrine/phpcr-odm": 20
     }
 }

@@ -4,16 +4,16 @@ namespace DCMS\Bundle\RoutingBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use DCMS\Bundle\RoutingBundle\Routing\Router;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use DCMS\Bundle\RoutingBundle\Routing\EndpointManager;
 
 class RouterTest extends WebTestCase
 {
     public function setUp()
     {
-        $this->client = static::createClient();
-        $this->container = $this->client->getContainer();
-
         // real objects
-        $this->epm = $this->container->get('dcms_routing.endpoint_manager');
+        $container = new ContainerBuilder;
+        $this->epm = new EndpointManager($container);
 
         // mock objects
         $this->epRepo = $this->getMockBuilder('DCMS\Bundle\RoutingBundle\Repository\EndpointRepository')
@@ -25,7 +25,7 @@ class RouterTest extends WebTestCase
             ->method('getKey')
             ->will($this->returnValue('test'));
 
-        $this->container->set('dcms_routing.repository.endpoint', $this->epRepo);
+        $container->set('dcms_routing.repository.endpoint', $this->epRepo);
     }
 
     /**
@@ -42,7 +42,6 @@ class RouterTest extends WebTestCase
      */
     public function testMatch_handlerNotFound()
     {
-        $epm = $this->container->get('dcms_routing.endpoint_manager');
         $this->epRepo->expects($this->once())
             ->method('getByPath')
             ->with('/foobar')
@@ -51,13 +50,12 @@ class RouterTest extends WebTestCase
             ->method('getEPClass')
             ->will($this->returnValue('test'));
 
-        $router = new Router($epm);
+        $router = new Router($this->epm);
         $router->match('/foobar');
     }
 
     public function testMatch_found()
     {
-        $epm = $this->container->get('dcms_routing.endpoint_manager');
         $this->epRepo->expects($this->once())
             ->method('getByPath')
             ->with('/foobar')
@@ -75,7 +73,7 @@ class RouterTest extends WebTestCase
             )));
         $this->epm->registerEPClass($this->epClass);
 
-        $router = new Router($epm);
+        $router = new Router($this->epm);
         $defs = $router->match('/foobar');
         $this->assertEquals(array(
             '_route' => 'dcms_endpoint_5',
