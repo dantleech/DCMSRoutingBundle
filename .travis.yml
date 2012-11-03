@@ -6,6 +6,6 @@ php:
 before_script:
     - wget http://getcomposer.org/composer.phar
     - php composer.phar install
-    - ./travis.sh
+    - sh travis.sh
 
 script: phpunit --configuration phpunit.travis.xml
