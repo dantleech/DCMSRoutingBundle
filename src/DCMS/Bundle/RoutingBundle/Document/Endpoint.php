@@ -2,9 +2,12 @@
 
 namespace DCMS\Bundle\RoutingBundle\Document;
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
+use DCMS\Bundle\RoutingBundle\Validation\Constraints as RoutingValidation;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * @PHPCR\Document(repositoryClass="DCMS\Bundle\RoutingBundle\Repository\EndpointRepository")
+ * @PHPCR\Document(referenceable=true, repositoryClass="DCMS\Bundle\RoutingBundle\Repository\EndpointRepository")
+ * @RoutingValidation\EndpointPath(field="path")
  */
 class Endpoint
 {
@@ -13,10 +16,20 @@ class Endpoint
      */
     protected $id;
 
+    /**
+     * @PHPCR\Uuid
+     */
+    protected $uuid;
+
     /** 
      * @PHPCR\ParentDocument
      */
     protected $parent;
+
+    /**
+     * @PHPCR\Children(filter="*")
+     */
+    protected $children;
 
     /** 
      * @PHPCR\NodeName
@@ -32,11 +45,6 @@ class Endpoint
      * @PHPCR\String()
      */
     protected $epClass;
-
-    /**
-     * @PHPCR\String()
-     */
-    protected $foreignId;
 
     /**
      * @PHPCR\String(multivalue=true)
@@ -56,6 +64,24 @@ class Endpoint
     public function setParent($parent)
     {
         $this->parent = $parent;
+    }
+
+    public function getChildren()
+    {
+        return $this->children;
+    }
+    
+    public function setChildren($children)
+    {
+        $this->children = $children;
+    }
+
+    public function addChild($child)
+    {
+        if (null === $this->children) {
+            $this->children = new ArrayCollection();
+        }
+        $this->children->add($child);
     }
 
     public function getNodeName()
@@ -98,13 +124,13 @@ class Endpoint
         $this->parameters = $parameters;
     }
 
-    public function getForeignId()
+    public function getUuid()
     {
-        return $this->foreignId;
+        return $this->uuid;
     }
     
-    public function setForeignId($foreignId)
+    public function setUuid($uuid)
     {
-        $this->foreignId = $foreignId;
+        $this->uuid = $uuid;
     }
 }

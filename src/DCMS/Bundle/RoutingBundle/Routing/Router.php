@@ -3,7 +3,9 @@
 namespace DCMS\Bundle\RoutingBundle\Routing;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
+use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\RequestContext;
+use Symfony\Component\Routing\RouteCollection;
 use DCMS\Bundle\RoutingBundle\Routing\EndpointManager;
 
 class Router implements RouterInterface
@@ -69,11 +71,13 @@ class Router implements RouterInterface
      */
     public function generate($name, $parameters = array(), $absolute = false)
     {
-        throw new ResourceNotFoundException('Generate method not supported');
+        throw new RouteNotFoundException('Generate method not supported');
     }
 
     public function getRouteCollection()
     {
+        $routeCollection = new RouteCollection();
+        return $routeCollection;
     }
 
     /**

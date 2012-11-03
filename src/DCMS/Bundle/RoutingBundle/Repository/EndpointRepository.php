@@ -10,7 +10,7 @@ class EndpointRepository extends DocumentRepository
         $ep = $this->findOneBy(array(
             'path' => $path,
         ));
-        var_dump($ep);
+
         return $ep;
     }
 }

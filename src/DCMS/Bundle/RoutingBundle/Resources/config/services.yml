@@ -32,3 +32,4 @@ services:
         calls:
             - [ setContext, [ @router.request_context ]]
             - [ add, [ @dcms_routing.router ]]
+            - [ add, [ @router.default ]]
