@@ -18,7 +18,7 @@ Stuff that works and is tested:
 
 Stuff not tested:
 
- * Validator
+ * Validator ..
 
 Stuff not currently implemented:
 
