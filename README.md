@@ -1,6 +1,8 @@
 DCMS Routing Bundle
 ===================
 
+NOTE: This bundle is dead. I have repaced all of it with the Symfony CMF router.
+
 [![Build Status](https://secure.travis-ci.org/dantleech/DCMSRoutingBundle.png)](http://travis-ci.org/dantleech/DCMSRoutingBundle)
 
 This bundle provides dynamic, extensible, database routing.
